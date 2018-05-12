@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <style>
+  @import url("https://fonts.googleapis.com/css?family=Press+Start+2P|VT323");
+.FirstBackgroundImage{
+  background:url("https://www.excitewallpapers.com/wp-content/uploads/Video-Game-Wallpapers-8-1280x720.jpg");
+}
+#head{
+  color:white;
+  font-size:44px;
+  font-family: 'Press Start 2P'
+}
+.head2{
+  padding-top:40px;
+  font-family: 'VT323';
+  font-size:30px;
+}
+#gridHeight,#gridWidth{
+  width:90px;
+  height:30px;
+}
+@keyframes gridSize{
+  0%{font-family:'arial';}
+  50%{font-family:'Press Start 2P';}
+  100%{font-family: 'VT323';}
+}
+#anim{
+  animation-name:gridSize;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+@keyframes chooseColor{
+  0%{color:violet;}
+   14%{color:indigo;}
+   28%{color:blue;}
+   42%{color:green;}
+   56%{color:yellow;}
+   70%{color:orange;}
+   84%{color:red;}
+}
+#head3{
+  padding-top:30px;
+  font-family: 'VT323';
+  font-size:50px;
+  animation-name:chooseColor;
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
+}
+
+#submit{
+  border-radius:50px;
+  margin-top:20px;
+  margin-bottom:20px;
+  width:100px;
+ -webkit-box-shadow: 11px 14px 23px 0px rgba(214,201,214,0.31);
+-moz-box-shadow: 11px 14px 23px 0px rgba(214,201,214,0.31);
+box-shadow: 11px 14px 23px 0px rgba(214,201,214,0.31);
+}
+/*---second section-------------*/
+#second{
+  background:url("https://images6.alphacoders.com/590/590494.png");
+ }
+/*--------table--------*/
+table,tr,td{border:1px solid black;  }
+table {
+   border-collapse:collapse;
+    margin: 0 auto;
+    border: 1px solid grey;
+  border-radius:30px;
+    
+}
+
+tr {
+  
+  height: 40px;
+}
+
+td {
+    
+  width: 40px;
+}
+
+  </style>
+  <script>
+  $(document).ready(function(){
+ 
+ $("#submit").click(function(e){
+   e.preventDefault();
+   let height=$("#gridHeight").val();
+   let width=$("#gridWidth").val();
+   let color=$("#colorPicker").val();
+ $('.cell').remove();
+   $('.row').remove();
+   $('#second').append("<center><b style=\"size:24px;\">Colour picker: </b><input id=\"colour\" type=color  style=\"width:50px; height:30px;\" value=\"#000000\"></center>");
+ if (height <= 200 && width <= 200) {
+   for(var i = 0; i < height; i++){
+    
+   $('#canvas').append("<tr class= 'row'>hello</tr>");
+   $('.row').css("background-color",color);
+   }
+   for(var j=0;j<width;j++){
+   
+     $('.row').append("<td class='cell'></td>>")
+   $('.cell').css("background-color",color);} 
+ }else{
+   window.alert("Please enter within 200. As it may crash or hang your browser");
+ }});
+
+//the painting//
+$( 'table' ).on( 'click', 'td' , function() {
+    var colour = $('#colour').val();
+    $(this).css( 'background', colour );
+});
+
+$('#canvas').on("dblclick", "td", function(){
+    $(this).css("background-color", "");
+});
+
+// Brush function
+$('#canvas').mousedown(function(e) {
+    if (e.which === 1){
+        $("td").bind("mouseover", function() {
+            var colour = $('#colorPicker').val();
+            $(this).css("background-color", colour);
+        });
+    }
+});
+$('#canvas').mouseup(function(e) {
+    if (e.which === 1) {
+        $("td").unbind("mouseover");
+    }
+});
+  });
+  </script>
+  <body style="color:white" class='container-fluid'>
+    <section class="FirstBackgroundImage" id="first">
+      <h1 id="head">
+        <center>PIXEL ART MAKER <i class="fas fa-smile"></i><center>
+          
+          </h1>
+        <h2 class="head2">
+          <center>Work of Athar Zafeer<center>
+            
+            </h2>
+   <center>
+     <h2 class="head2" id="anim">CHOOSE GRID SIZE<h2>
+       
+       </center>          
+     <form>
+       <h2 class="head2" style="padding-left:30%">Grid height:
+         <input type="number" placeholder="grid height" id="gridHeight" maxlength="3" minlenght="1" value="2">
+ Grid width:
+         <input type="number" placeholder="grid width" id="gridWidth" maxlength="3" minlenght="1" value="2"></h2>    
+       <h2 id="head3">
+         <center>Choose a back ground color(donot choose dark black)</center>
+         
+       </h2>
+       <center>
+         <input type=color id="colorPicker" style="width:50px; height:30px;" value="#ffffff">
+         
+       </center>
+      <center>
+        <button id="submit"><strong>submit</strong>
+          
+        </button>
+        
+       </center>      
+     </form>    
+</section>
+<section id="second">
+ <br>
+  <h2 class='head2'style="font-size:50px; color:black;">
+    <center>Canvas<center></h2>
+    <table id="canvas"></table>
+     </section>
+</body>
+</html>    
